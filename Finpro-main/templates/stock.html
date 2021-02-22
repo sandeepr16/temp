@@ -1,0 +1,490 @@
+<html>
+    <head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>STOCK ANALYSIS</title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+        <script src='http://cdn.rawgit.com/pguso/jquery-plugin-circliful/master/js/jquery.circliful.min.js'></script>
+        <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+		<style>
+		
+        * {
+          box-sizing: border-box;
+        }
+        
+        body {
+          font: 16px Arial;  
+        }
+        .form{
+            margin: 50%;
+        }
+        
+        /*the container must be positioned relative:*/
+        .autocomplete {
+          position: relative;
+          display: inline-block;
+        }
+        
+        input {
+          border: 1px solid transparent;
+          background-color: #f1f1f1;
+          padding: 10px;
+		  font:Optum
+          font-size: 16px;
+        }
+        
+        input[type=text] {
+          background-color: #f1f1f1;
+          width: 100%;
+        }
+        
+        input[type=submit] {
+          background-color: DodgerBlue;
+          color: #fff;
+          cursor: pointer;
+        }
+        .container{
+          margin: auto;
+        }
+		@media (min-width: 768px){
+        .container {
+               max-width: 100%;
+	               }
+	           }
+        .projectimg{
+			display: none;
+		}
+        .autocomplete-items {
+          position: absolute;
+          border: 1px solid #d4d4d4;
+          border-bottom: none;
+          border-top: none;
+          z-index: 99;
+          /*position the autocomplete items to be the same width as the container:*/
+          top: 100%;
+          left: 0;
+          right: 0;
+        }
+        
+        .autocomplete-items div {
+          padding: 10px;
+          cursor: pointer;
+          background-color: #fff; 
+          border-bottom: 1px solid #d4d4d4; 
+        }
+        
+        /*when hovering an item:*/
+        .autocomplete-items div:hover {
+          background-color: #e9e9e9; 
+        }
+        
+        /*when navigating through the items using the arrow keys:*/
+        .autocomplete-active {
+          background-color: DodgerBlue !important; 
+          color: #ffffff; 
+        }
+        #myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 20px; /* Place the button at the bottom of the page */
+  right: 30px; /* Place the button 30px from the right */
+  z-index: 99; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: green; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 100px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #555; /* Add a dark-grey background on hover */
+}
+		
+}
+table.basedata, td.basedata, th.basedata{
+		border: 1px solid black;
+		}
+		tr.basedata:nth-child(even){background-color: #d3d3d3;}
+    .jumbotron {
+            background: url("static/images/stockimage3.png") center  no-repeat;
+			background-size: 100% 140% ;
+        }
+		tr.strength:nth-child(even){background-color: #06ff902b}
+		tr.weakness:nth-child(even){background-color: #ff060642}
+		tr.oppurtunity:nth-child(even){background-color: #03a9f43d}
+		tr.threats:nth-child(even){background-color: #d5c04b26}
+		h3.strength{color: #16A086}
+		h3.weakness{color: #C0392B}
+		h3.oppurtunity{color: #2A7FB8}
+		h3.threats{color: #E89207}
+        </style>
+    </head>     
+    <body>
+	<div class="container">
+      <div class="jumbotron d-flex" style= "padding:100;">           
+		  </div>
+        
+        <!--Make sure the form has the autocomplete function switched off:-->
+  <div class="container con2">
+        <form class="stock d-flex justify-content-center" name = "stockform" autocomplete="off" action="{{ url_for('swot')}}" method="post">
+			<div class="autocomplete col-12 justify-content-center" style="width:500px;">
+				<div class="row">
+					<div class="col-sm-6">
+						<input id="myInput" class="project" type="text" name="companyname" placeholder="STOCK NAME"></td>
+					</div>
+					<div class="col-sm">
+						<input id="myInput1" class="project" type="text" name="companyname1" placeholder="STOCK NAME"></td>
+					</div>
+				</div>	
+				<div class="row ">
+					<div class="col-12 d-flex justify-content-center mt-1">
+
+						<input type ="submit" value="Compare">
+					</div>
+					
+				</div>					 								
+				    
+			</div>
+		</form>
+	</div>
+	<div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <table class="table table-borderless">
+                    <tr>
+                        <td colspan="2">
+                            <h1> {{ compname }} </h1>
+                        </td>
+                        <td colspan="2">
+                            <h1> {{ compname1 }} </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                      <td colspan="2">
+                          <table style="width:100%" class="basedata">
+                              {% for q in headings %}
+                {% set h = headings[loop.index-1] %}
+                {% set v = values[loop.index-1] %}
+                              <tr class="basedata">
+                <td class="basedata">{{ h }}</td>
+                <td class="basedata">{{ v }}</td>
+              </tr>
+                              {% endfor %}
+                           </table>
+                       </td>
+                       <td colspan="2">
+                          <table style="width:100%">
+                              {% for q in headings1 %}
+                {% set h = headings1[loop.index-1] %}
+                {% set v = values1[loop.index-1] %}
+                              <tr class="basedata">
+                <td class="basedata">{{ h }}</td>
+                <td class="basedata">{{ v }}</td>
+              </tr>
+                              {% endfor %}
+                           </table>
+                       </td>
+                  </tr>
+                  <tr>
+                        <td colspan="2" style="border-right:20px solid white">
+                            <table class="strength">
+                                <tr><td><h3 class="strength">{{ name11 }}</h3></td></tr>
+                                {% for q in strn %} 
+                                <tr class="strength"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                        </td>
+                        <td colspan="2">
+								<table class="strength">
+                                <tr><td><h3 class="strength">{{ name11 }}</h3></td></tr>
+                                {% for q in strn1 %} 
+                                <tr class="strength"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="border-right:20px solid white">
+                            <table class="weakness">
+                                <tr><td><h3 class="weakness">{{ name2 }}</h3></td></tr>
+                                {% for q in weak %} 
+                                <tr class="weakness"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                        </td>
+                        <td colspan="2">
+                            <table class="weakness">
+                                <tr><td><h3 class="weakness">{{ name2 }}</h3></td></tr>
+                                {% for q in weak1 %} 
+                                <tr class="weakness"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                        </td>
+                       
+                  </tr>
+                  <tr>
+                      <td colspan="2" style="border-right:20px solid white">
+                        <table class="oppurtunity">
+                                <tr ><td><h3 class="oppurtunity">{{ name3 }}</h3></td></tr>
+                                {% for q in oppr %} 
+                                <tr class="oppurtunity"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                      </td>
+                      <td colspan="2">
+                        <table class="oppurtunity">
+                                <tr ><td><h3 class="oppurtunity">{{ name3 }}</h3></td></tr>
+                                {% for q in oppr1 %} 
+                                <tr class="oppurtunity"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                      </td>
+                  </tr>
+                  <tr>
+                      <td colspan="2" style="border-right:20px solid white">                         
+                        <table class="threats">
+                                <tr><td><h3 class="threats">{{ name4 }}</h3></td></tr>
+                                {% for q in thrt %} 
+                                <tr class="threats"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                      </td>
+                      <td colspan="2">
+                        <table class="threats">
+                                <tr><td><h3 class="threats">{{ name4 }}</h3></td></tr>
+                                {% for q in thrt1 %} 
+                                <tr class="threats"><td>{{ q }}</td></tr> 
+                                {% endfor %} 
+                             </table>
+                      </td>
+				  </tr>
+                  <tr>
+                    
+                      <td colspan="2">
+                        <img class="projectimg" src = {{urla}} id="mypng" height="900" width="600">
+                      </td>
+                      <td colspan="2">
+                        <img class="projectimg" src = {{urlb}} id="mypng1" height="900" width="600">
+                      </td>
+                  </tr>
+        </table>
+                                                 
+             </div>
+             </div>
+             </div>	
+             <button onclick="dispImg()" id="myBtn" title="Go to top" >View Graphs</button>
+        <script>
+			var inputs = document.getElementById("myInput");
+			function autocomplete(inp, arr) {
+				var currentFocus;
+				inp.addEventListener("input", function(e) {
+					var a, b, i, val = this.value;
+                    closeAllLists();
+					if (!val) { return false;}
+					currentFocus = -1;
+					a = document.createElement("DIV");
+					a.setAttribute("id", this.id + "autocomplete-list");
+					a.setAttribute("class", "autocomplete-items");
+					this.parentNode.appendChild(a);
+					for (i = 0; i < arr.length; i++) {
+						if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+							b = document.createElement("DIV");
+							b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+							b.innerHTML += arr[i].substr(val.length);
+							b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+							b.addEventListener("click", function(e) {
+								inp.value = this.getElementsByTagName("input")[0].value;
+								closeAllLists();
+							});
+							a.appendChild(b);
+						}
+					}
+				});
+				inp.addEventListener("keydown", function(e) {
+					var x = document.getElementById(this.id + "autocomplete-list");
+					if (x) x = x.getElementsByTagName("div");
+					if (e.keyCode == 40) {
+						currentFocus++;
+						addActive(x);
+					} 
+					else if (e.keyCode == 38) {
+						currentFocus--;
+						addActive(x);
+					} 
+					else if (e.keyCode == 13) {
+						e.preventDefault();
+						if (currentFocus > -1) {
+							if (x) x[currentFocus].click();
+						}
+					}
+				});
+				function addActive(x) {
+					if (!x) return false;
+					removeActive(x);
+					if (currentFocus >= x.length) currentFocus = 0;
+					if (currentFocus < 0) currentFocus = (x.length - 1);
+					x[currentFocus].classList.add("autocomplete-active");
+				}
+				function removeActive(x) {
+					for (var i = 0; i < x.length; i++) {
+						x[i].classList.remove("autocomplete-active");
+					}
+				}
+				function closeAllLists(elmnt) {
+					var x = document.getElementsByClassName("autocomplete-items");
+					for (var i = 0; i < x.length; i++) {
+						if (elmnt != x[i] && elmnt != inp) {
+							x[i].parentNode.removeChild(x[i]);
+						}
+					}
+				}
+				document.addEventListener("click", function (e) {
+					closeAllLists(e.target);
+				});
+			}
+  function autocomplete1(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+			// $( function() {
+            // var availableTags =[ '3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Enterpris', 'Adani Ports', 'Adani Power', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AGL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Alok Industries', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharti Airtel', 'Bharti Infratel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chalet Hotels', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam', 'Cholamandalam', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Fert', 'Deepak Nitrite', 'Delta Corp', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Force Motors', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'Gateway Distri', 'GE Power India', 'GE Shipping', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Havells India', 'Hawkins Cooker', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard', 'ICICI Prudentia', 'ICICI Securitie', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'INOX Leisure', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'JTEKT India', 'Jubilant Food', 'Jubilant Life', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra Holida', 'Mahindra Life', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Meghmani Organi', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'Navneet', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'Network 18', 'New India Assur', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NOCIL', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Parag Milk Food', 'PC Jeweller', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'S H Kelkar', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sheela Foam', 'Shilpa', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Somany Ceramics', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tamil Newsprint', 'Tasty Bite', 'Tata Chemicals', 'Tata Coffee', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Metaliks', 'Tata Motors', 'Tata Power', 'Tata Steel', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'TVS Srichakra', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Va Tech Wabag', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness']
+            // $( "#myInput" ).autocomplete({
+            //  source: availableTags
+            // });
+		    // });
+			var stock =[ '3M India', 'Aarti Ind', 'AAVAS Financier', 'AB Capital', 'ABB India', 'Abbott India', 'ACC', 'Adani Enterpris', 'Adani Ports', 'Adani Power', 'Adani Trans', 'Aditya Birla F', 'Advanced Enzyme', 'Aegis Logistics', 'AFL', 'AGL', 'AIA Engineering', 'Ajanta Pharma', 'Akzo Nobel', 'Alembic Pharma', 'Alkem Lab', 'Alkyl Amines', 'Allcargo', 'Alok Industries', 'Amara Raja Batt', 'Amber Enterpris', 'Ambuja Cements', 'APL Apollo', 'Apollo Hospital', 'Apollo Tyres', 'Ashok Leyland', 'Ashoka Buildcon', 'Asian Paints', 'Aster DM Health', 'Astral Poly Tec', 'AstraZeneca', 'Atul', 'AU Small Financ', 'Aurobindo Pharm', 'Avanti Feeds', 'Avenue Supermar', 'Axis Bank', 'Bajaj Auto', 'Bajaj Consumer', 'Bajaj Electric', 'Bajaj Finance', 'Bajaj Finserv', 'Bajaj Holdings', 'Balkrishna Ind', 'Balmer Lawrie', 'Balrampur Chini', 'Bandhan Bank', 'Bank of Baroda', 'Bank of India', 'Bank of Mah', 'BASF', 'Bata India', 'Bayer CropScien', 'BEML', 'Berger Paints', 'Bharat Dynamics', 'Bharat Elec', 'Bharat Forge', 'Bharti Airtel', 'Bharti Infratel', 'BHEL', 'Biocon', 'Birla Corp', 'Birlasoft', 'Bliss GVS', 'Blue Dart', 'Blue Star', 'Bombay Burmah', 'Bombay Dyeing', 'Bosch', 'BPCL', 'Brigade Ent', 'Britannia', 'Cadila Health', 'Can Fin Homes', 'Canara Bank', 'Caplin Labs', 'Capri Global', 'Carborundum', 'CARE Ratings', 'Castrol', 'CCL Products', 'Ceat', 'Central Bank', 'Century', 'CenturyPlyboard', 'Cera Sanitary', 'CESC', 'CG Consumer', 'Chalet Hotels', 'Chambal Fert', 'Chennai Petro', 'Cholamandalam', 'Cholamandalam', 'Cipla', 'City Union Bank', 'Coal India', 'Cochin Shipyard', 'COFORGE LTD.', 'Colgate', 'Container Corp', 'Coromandel Int', 'CreditAccess Gr', 'CRISIL', 'Cummins', 'Cyient', 'Dabur India', 'Dalmia Bharat', 'DB Corp', 'DCB Bank', 'DCM Shriram', 'Deepak Fert', 'Deepak Nitrite', 'Delta Corp', 'Dhanuka Agritec', 'Dilip Buildcon', 'Dish TV', 'Dishman Carboge', 'Divis Labs', 'Dixon Technolog', 'DLF', 'Dr Lal PathLab', 'Dr Reddys Labs', 'eClerx Services', 'Edelweiss', 'Eicher Motors', 'EID Parry', 'EIH', 'Emami', 'Endurance Techn', 'EngineersInd', 'EPL', 'Equitas Holding', 'Esab India', 'Escorts', 'Exide Ind', 'FDC', 'Federal Bank', 'Fine Organics', 'Finolex Cables', 'Finolex Ind', 'Firstsource Sol', 'Force Motors', 'Fortis Health', 'Future Consumer', 'Future Retail', 'GAIL', 'Galaxy Surfacta', 'Garden Reach Sh', 'Garware Technic', 'Gateway Distri', 'GE Power India', 'GE Shipping', 'General Insuran', 'Gillette India', 'GlaxoSmithKline', 'Glenmark', 'GMM Pfaudler', 'GMR Infra', 'GNFC', 'Godfrey Phillip', 'Godrej Agrovet', 'Godrej Consumer', 'Godrej Ind', 'Godrej Prop', 'Granules India', 'Graphite India', 'Grasim', 'Greaves Cotton', 'Grindwell Norto', 'GSFC', 'Guj Alkali', 'Guj Heavy Chem', 'Guj Mineral', 'Guj State Petro', 'Gujarat Fluoro', 'Gujarat Gas', 'Gujarat Pipavav', 'Gulf Oil Lubric', 'Hathway Cable', 'Havells India', 'Hawkins Cooker', 'HCL Tech', 'HDFC', 'HDFC AMC', 'HDFC Bank', 'HDFC Life', 'HEG', 'Heidelberg Cem', 'Heritage Foods', 'Hero Motocorp', 'HFCL', 'Himadri Special', 'Himatsingka Sei', 'Hind Copper', 'Hind Zinc', 'Hindalco', 'Hindustan Aeron', 'Honeywell Autom', 'HPCL', 'HUDCO', 'HUL', 'ICICI Bank', 'ICICI Lombard', 'ICICI Prudentia', 'ICICI Securitie', 'IDBI Bank', 'IDFC', 'IDFC First Bank', 'IEX', 'IFB Industries', 'IFCI', 'IGL', 'IIFL Finance', 'India Cements', 'India Tourism D', 'Indiabulls Hsg', 'Indiabulls Real', 'Indiamart Inter', 'Indian Bank', 'Indian Hotels', 'Indoco Remedies', 'Indostar Capita', 'IndusInd Bank', 'Infibeam Avenue', 'Info Edge', 'Infosys', 'INOX Leisure', 'Interglobe Avi', 'IOB', 'IOC', 'Ipca Labs', 'IRB Infra', 'Ircon Internati', 'IRCTC', 'ITC', 'ITI', 'IWML', 'J. K. Cement', 'JagranPrakashan', 'Jai Corp', 'Jamna Auto', 'JB Chemicals', 'Jindal (Hisar)', 'Jindal Saw', 'Jindal Stainles', 'Jindal Steel', 'JK Bank', 'JK Lakshmi Cem', 'JK Paper', 'JK Tyre & Ind', 'JM Financial', 'Johnson Control', 'JSW Energy', 'JSW Steel', 'JTEKT India', 'Jubilant Food', 'Jubilant Life', 'Just Dial', 'Jyothy Labs', 'Kajaria Ceramic', 'Kalpataru Power', 'Kansai Nerolac', 'Karnataka Bank', 'KEC Intl', 'KEI Industries', 'KNR Construct', 'Kotak Mahindra', 'KPIT Tech', 'KPR Mill', 'KRBL', 'KSB Pumps', 'L&T Finance', 'L&T Infotech', 'L&T Technology', 'La Opala RG', 'Lakshmi Machine', 'Larsen', 'Laurus Labs', 'Lemon Tree Hote', 'LIC Housing Fin', 'Linde India', 'Lupin', 'Lux Industries', 'M&M', 'Mah Scooters', 'Mah Seamless', 'Mahanagar Gas', 'Mahindra Holida', 'Mahindra Life', 'Mahindra Logist', 'Manappuram Fin', 'Marico', 'Maruti Suzuki', 'MAS Financial S', 'Max Financial', 'MCX India', 'Meghmani Organi', 'Metropolis', 'Minda Corp', 'Minda Ind', 'Mindtree', 'Mishra Dhatu Ni', 'MMTC Ltd', 'MOIL', 'Motherson Sumi', 'Motilal Oswal', 'MphasiS', 'MRF', 'MRPL', 'Muthoot Finance', 'NALCO', 'Narayana Hruda', 'Natco Pharma', 'Nava Bharat Ven', 'Navin Fluorine', 'Navneet', 'NBCC (India)', 'NCC', 'NESCO', 'Nestle', 'Network 18', 'New India Assur', 'NHPC', 'Nilkamal', 'Nippon', 'NLC India', 'NMDC', 'NOCIL', 'NTPC', 'Oberoi Realty', 'Oil India', 'Omaxe', 'ONGC', 'Oracle Fin Serv', 'Orient Cement', 'Orient Refract', 'P and G', 'Page Industries', 'Parag Milk Food', 'PC Jeweller', 'Persistent', 'Petronet LNG', 'Pfizer', 'Phillips Carbon', 'Phoenix Mills', 'PI Industries', 'Pidilite Ind', 'Piramal Enter', 'PNB', 'PNB Housing Fin', 'PNC Infratech', 'Polycab', 'Power Finance', 'Power Grid Corp', 'Prestige Estate', 'Prism Cement', 'Procter&Gamble', 'PTC India', 'PVR', 'Quess Corp', 'Radico Khaitan', 'Rail Vikas', 'Rain Industries', 'Rajesh Exports', 'Rallis India', 'Ramco Cements', 'Rashtriya Chem', 'Ratnamani Metal', 'Raymond', 'RBL Bank', 'REC', 'Redington', 'Relaxo Footwear', 'Reliance', 'Repco Home', 'RITES', 'S H Kelkar', 'SAIL', 'Sanofi India', 'SBI', 'SBI Life Insura', 'Schaeffler Ind', 'Schneider Infra', 'Sheela Foam', 'Shilpa', 'Shipping Corp', 'Shoppers Stop', 'Shree Cements', 'Shriram City', 'Shriram Trans', 'Siemens', 'SIS', 'SJVN', 'SKF India', 'Sobha', 'Solar Ind', 'Somany Ceramics', 'Sonata', 'South Ind Bk', 'SpiceJet', 'SRF', 'Star Cement', 'Sterlite Techno', 'Strides Pharma', 'Sudarshan Chem', 'SUMITOMO', 'Sun Pharma', 'Sun Pharma Adv', 'Sun TV Network', 'Sundram', 'Sunteck Realty', 'Suprajit Eng', 'Supreme Ind', 'Suzlon Energy', 'Swan Energy', 'Symphony', 'Syngene Intl', 'Tamil Newsprint', 'Tasty Bite', 'Tata Chemicals', 'Tata Coffee', 'Tata Comm', 'TATA Cons. Prod', 'Tata Elxsi', 'Tata Inv Corp', 'Tata Metaliks', 'Tata Motors', 'Tata Power', 'Tata Steel', 'TCNS Clothing C', 'TCS', 'TeamLease Ser.', 'Tech Mahindra', 'Thermax', 'Thyrocare Techn', 'Time Techno', 'Timken', 'Titan Company', 'TML-D', 'Torrent Pharma', 'Torrent Power', 'Trent', 'Trident', 'TTK Prestige', 'TV TodayNetwork', 'TV18 Broadcast', 'TVS Motor', 'TVS Srichakra', 'UCO Bank', 'Uflex', 'Ujjivan Financi', 'UltraTechCement', 'Union Bank', 'United Brewerie', 'UPL', 'V-Guard Ind', 'V-Mart Retail', 'Va Tech Wabag', 'Vaibhav Global', 'Vakrangee', 'Vardhman Text', 'Varroc Engineer', 'Varun Beverages', 'Vedanta', 'Venkys', 'Vinati Organics', 'VIP Industries', 'Vodafone Idea', 'Voltas', 'VRL Logistics', 'VST', 'WABCO India', 'Welspun Corp', 'Welspun India', 'Westlife Dev', 'Whirlpool', 'Wipro', 'Wockhardt', 'Zee Entertain', 'Zensar Tech', 'Zydus Wellness']
+            
+			var NSE=['3MINDIA', 'AARTIIND', 'AAVAS', 'ABCAPITAL', 'ABB', 'ABBOTINDIA', 'ACC', 'ADANIENT', 'ADANIPORTS', 'ADANIPOWER', 'ADANITRANS', 'ABFRL', 'ADVENZYMES', 'AEGISCHEM', 'ARVINDFASN', 'ADANIGAS', 'AIAENG', 'AJANTPHARM', 'AKZOINDIA', 'APLLTD', 'ALKEM', 'ALKYLAMINE', 'ALLCARGO', 'ALOKINDS', 'AMARAJABAT', 'AMBER', 'AMBUJACEM', 'APLAPOLLO', 'APOLLOHOSP', 'APOLLOTYRE', 'ASHOKLEY', 'ASHOKA', 'ASIANPAINT', 'ASTERDM', 'ASTRAL', 'ASTRAZEN', 'ATUL', 'AUBANK', 'AUROPHARMA', 'AVANTIFEED', 'DMART', 'AXISBANK', 'BAJAJ-AUTO', 'BAJAJCON', 'BAJAJELEC', 'BAJFINANCE', 'BAJAJFINSV', 'BAJAJHLDNG', 'BALKRISIND', 'BALMLAWRIE', 'BALRAMCHIN', 'BANDHANBNK', 'BANKBARODA', 'BANKINDIA', 'MAHABANK', 'BASF', 'BATAINDIA', 'BAYERCROP', 'BEML', 'BERGEPAINT', 'BDL', 'BEL', 'BHARATFORG', 'BHARTIARTL', 'INFRATEL', 'BHEL', 'BIOCON', 'BIRLACORPN', 'BSOFT', 'BLISSGVS', 'BLUEDART', 'BLUESTARCO', 'BBTC', 'BOMDYEING', 'BOSCHLTD', 'BPCL', 'BRIGADE', 'BRITANNIA', 'CADILAHC', 'CANFINHOME', 'CANBK', 'CAPLIPOINT', 'CGCL', 'CARBORUNIV', 'CARERATING', 'CASTROLIND', 'CCL', 'CEATLTD', 'CENTRALBK', 'CENTURYTEX', 'CENTURYPLY', 'CERA', 'CESC', 'CROMPTON', 'CHALET', 'CHAMBLFERT', 'CHENNPETRO', 'CHOLAFIN', 'CHOLAHLDNG', 'CIPLA', 'CUB', 'COALINDIA', 'COCHINSHIP', 'COFORGE', 'COLPAL', 'CONCOR', 'COROMANDEL', 'CREDITACC', 'CRISIL', 'CUMMINSIND', 'CYIENT', 'DABUR', 'DALBHARAT', 'DBCORP', 'DCBBANK', 'DCMSHRIRAM', 'DEEPAKFERT', 'DEEPAKNTR', 'DELTACORP', 'DHANUKA', 'DBL', 'DISHTV', 'DCAL', 'DIVISLAB', 'DIXON', 'DLF', 'LALPATHLAB', 'DRREDDY', 'ECLERX', 'EDELWEISS', 'EICHERMOT', 'EIDPARRY', 'EIHOTEL', 'EMAMILTD', 'ENDURANCE', 'ENGINERSIN', 'EPL', 'EQUITAS', 'ESABINDIA', 'ESCORTS', 'EXIDEIND', 'FDC', 'FEDERALBNK', 'FINEORG', 'FINCABLES', 'FINPIPE', 'FSL', 'FORCEMOT', 'FORTIS', 'FCONSUMER', 'FRETAIL', 'GAIL', 'GALAXYSURF', 'GRSE', 'GARFIBRES', 'GDL', 'GEPIL', 'GESHIP', 'GICRE', 'GILLETTE', 'GLAXO', 'GLENMARK', 'GMMPFAUDLR', 'GMRINFRA', 'GNFC', 'GODFRYPHLP', 'GODREJAGRO', 'GODREJCP', 'GODREJIND', 'GODREJPROP', 'GRANULES', 'GRAPHITE', 'GRASIM', 'GREAVESCOT', 'GRINDWELL', 'GSFC', 'GUJALKALI', 'GHCL', 'GMDCLTD', 'GSPL', 'FLUOROCHEM', 'GUJGASLTD', 'GPPL', 'GULFOILLUB', 'HATHWAY', 'HAVELLS', 'HAWKINCOOK', 'HCLTECH', 'HDFC', 'HDFCAMC', 'HDFCBANK', 'HDFCLIFE', 'HEG', 'HEIDELBERG', 'HERITGFOOD', 'HEROMOTOCO', 'HFCL', 'HSCL', 'HIMATSEIDE', 'HINDCOPPER', 'HINDZINC', 'HINDALCO', 'HAL', 'HONAUT', 'HINDPETRO', 'HUDCO', 'HINDUNILVR', 'ICICIBANK', 'ICICIGI', 'ICICIPRULI', 'ISEC', 'IDBI', 'IDFC', 'IDFCFIRSTB', 'IEX', 'IFBIND', 'IFCI', 'IGL', 'IIFL', 'INDIACEM', 'ITDC', 'IBULHSGFIN', 'IBREALEST', 'INDIAMART', 'INDIANB', 'INDHOTEL', 'INDOCO', 'INDOSTAR', 'INDUSINDBK', 'INFIBEAM', 'NAUKRI', 'INFY', 'INOXLEISUR', 'INDIGO', 'IOB', 'IOC', 'IPCALAB', 'IRB', 'IRCON', 'IRCTC', 'ITC', 'ITI', 'IIFLWAM', 'JKCEMENT', 'JAGRAN', 'JAICORPLTD', 'JAMNAAUTO', 'JBCHEPHARM', 'JSLHISAR', 'JINDALSAW', 'JSL', 'JINDALSTEL', 'J&KBANK', 'JKLAKSHMI', 'JKPAPER', 'JKTYRE', 'JMFINANCIL', 'JCHAC', 'JSWENERGY', 'JSWSTEEL', 'JTEKTINDIA', 'JUBLFOOD', 'JUBILANT', 'JUSTDIAL', 'JYOTHYLAB', 'KAJARIACER', 'KALPATPOWR', 'KANSAINER', 'KTKBANK', 'KEC', 'KEI', 'KNRCON', 'KOTAKBANK', 'KPITTECH', 'KPRMILL', 'KRBL', 'KSB', 'L&TFH', 'LTI', 'LTTS', 'LAOPALA', 'LAXMIMACH', 'LT', 'LAURUSLABS', 'LEMONTREE', 'LICHSGFIN', 'LINDEINDIA', 'LUPIN', 'LUXIND', 'M&M', 'MAHSCOOTER', 'MAHSEAMLES', 'MGL', 'MHRIL', 'MAHLIFE', 'MAHLOG', 'MANAPPURAM', 'MARICO', 'MARUTI', 'MASFIN', 'MFSL', 'MCX', 'MEGH', 'METROPOLIS', 'MINDACORP', 'MINDAIND', 'MINDTREE', 'MIDHANI', 'MMTC', 'MOIL', 'MOTHERSUMI', 'MOTILALOFS', 'MPHASIS', 'MRF', 'MRPL', 'MUTHOOTFIN', 'NATIONALUM', 'NH', 'NATCOPHARM', 'NBVENTURES', 'NAVINFLUOR', 'NAVNETEDUL', 'NBCC', 'NCC', 'NESCO', 'NESTLEIND', 'NETWORK18', 'NIACL', 'NHPC', 'NILKAMAL', 'NAM-INDIA', 'NLCINDIA', 'NMDC', 'NOCIL', 'NTPC', 'OBEROIRLTY', 'OIL', 'OMAXE', 'ONGC', 'OFSS', 'ORIENTCEM', 'ORIENTREF', 'PGHH', 'PAGEIND', 'PARAGMILK', 'PCJEWELLER', 'PERSISTENT', 'PETRONET', 'PFIZER', 'PHILIPCARB', 'PHOENIXLTD', 'PIIND', 'PIDILITIND', 'PEL', 'PNB', 'PNBHOUSING', 'PNCINFRA', 'POLYCAB', 'PFC', 'POWERGRID', 'PRESTIGE', 'PRSMJOHNSN', 'PGHL', 'PTC', 'PVR', 'QUESS', 'RADICO', 'RVNL', 'RAIN', 'RAJESHEXPO', 'RALLIS', 'RAMCOCEM', 'RCF', 'RATNAMANI', 'RAYMOND', 'RBLBANK', 'RECLTD', 'REDINGTON', 'RELAXO', 'RELIANCE', 'REPCOHOME', 'RITES', 'SHK', 'SAIL', 'SANOFI', 'SBIN', 'SBILIFE', 'SCHAEFFLER', 'SCHNEIDER', 'SFL', 'SHILPAMED', 'SCI', 'SHOPERSTOP', 'SHREECEM', 'SHRIRAMCIT', 'SRTRANSFIN', 'SIEMENS', 'SIS', 'SJVN', 'SKFINDIA', 'SOBHA', 'SOLARINDS', 'SOMANYCERA', 'SONATSOFTW', 'SOUTHBANK', 'SPICEJET', 'SRF', 'STARCEMENT', 'STLTECH', 'STAR', 'SUDARSCHEM', 'SUMICHEM', 'SUNPHARMA', 'SPARC', 'SUNTV', 'SUNDRMFAST', 'SUNTECK', 'SUPRAJIT', 'SUPREMEIND', 'SUZLON', 'SWANENERGY', 'SYMPHONY', 'SYNGENE', 'TNPL', 'TASTYBITE', 'TATACHEM', 'TATACOFFEE', 'TATACOMM', 'TATACONSUM', 'TATAELXSI', 'TATAINVEST', 'TATAMETALI', 'TATAMOTORS', 'TATAPOWER', 'TATASTEEL', 'TCNSBRANDS', 'TCS', 'TEAMLEASE', 'TECHM', 'THERMAX', 'THYROCARE', 'TIMETECHNO', 'TIMKEN', 'TITAN', 'TATAMTRDVR', 'TORNTPHARM', 'TORNTPOWER', 'TRENT', 'TRIDENT', 'TTKPRESTIG', 'TVTODAY', 'TV18BRDCST', 'TVSMOTOR', 'TVSSRICHAK', 'UCOBANK', 'UFLEX', 'UJJIVAN', 'ULTRACEMCO', 'UNIONBANK', 'UBL', 'UPL', 'VGUARD', 'VMART', 'WABAG', 'VAIBHAVGBL', 'VAKRANGEE', 'VTL', 'VARROC', 'VBL', 'VEDL', 'VENKEYS', 'VINATIORGA', 'VIPIND', 'IDEA', 'VOLTAS', 'VRLLOG', 'VSTIND', 'WABCOINDIA', 'WELCORP', 'WELSPUNIND', 'WESTLIFE', 'WHIRLPOOL', 'WIPRO', 'WOCKPHARMA', 'ZEEL', 'ZENSARTECH', 'ZYDUSWELL']
+			autocomplete(document.getElementById("myInput"), stock);
+			autocomplete1(document.getElementById("myInput1"), stock);
+			function dispImg(){
+				document.getElementById("mypng").style.display="block";
+				document.getElementById("mypng1").style.display="block";
+			}
+
+
+
+      mybutton = document.getElementById("myBtn");
+
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+		</script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>  
+	</body>
+</html>

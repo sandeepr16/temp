@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="FinPro - provide the information of stocks.">
+    <meta name="keywords" content=" ">
+    <title>FinPro</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- animsition css -->
+    <link rel="stylesheet" type="text/css" href="css/animsition.min.css">
+    <!-- Font Awesome CSS -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- font css -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <!-- owl Carousel Css -->
+    <link href="css/owl.carousel.css" rel="stylesheet">
+    <link href="css/owl.theme.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="animsition">
+    <div class="intro-section">
+        <!-- intro section -->
+        <div class="top-header">
+            <!-- top heder -->
+            <div class="container">
+                <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-5  hidden-xs">
+                            <p>For the Knowledge of Stocks.</p>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-7 hidden-xs">
+                            <div class="pull-right">
+                                <span class="top-link"><i class="fa fa-phone"></i> +00 (123) 456 7890</span>
+                                <span class="top-link"><i class="fa fa-envelope"></i> info@broker.com</span>
+                                <span class="navigation-search top-link">
+              <a href="#"><i class="fa fa-search"></i></a>
+            </span>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.top header -->
+            <!-- navigation-transparent -->
+            <div class="header">
+                <!-- navigation -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                            <a class="logo" href="index.html"><img src="images/logo.png" alt=""></a>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
+                            <div id="navigation" class="navigation">
+                                <ul class="pull-right">
+                                    <li class="active"><a href="index.html" title="Home" class="animsition-link">Home</a></li>
+                                    <li><a href="blog.html" title="Blog" class="animsition-link">Blog</a>
+                                        <ul>
+                                            <li><a href="blog.html" title="Blog" class="animsition-link">Blog</a></li>
+                                            <li><a href="blog-single.html" title="Blog Single" class="animsition-link">Blog Single</a></li>
+                                        </ul>
+                                    </li>
+                                   
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- /.navigation -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-12 hidden-xs">
+                    <div class="intro-caption">
+                        <!-- intro caption -->
+                        <h1 class="intro-title">Helping You Every Step <br> of The Way</h1>
+                        <p class="mb40">All Hurdles. </p>
+                        <a href="#" class="btn btn-default">Download</a>
+                        <a href="#" class="btn btn-white">Learn More</a> </div>
+                    <!-- /.intro caption -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.intro section -->
+    <div class="section-space60">
+        <!-- section-space80 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-title">
+                        <h1>The Best Financial and Stock Services</h1>
+                        <p>You can get all the financial news and stock related news and prediction right here. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block mb20 pinside30 outline text-center">
+                        <div class="service-icon mb30"><img src="images/service-icon1.png" class="img-responsive" alt=""></div>
+                        <div class="">
+                            <h2><a href="{{ url_for('comp')}}" class="heading-title">Compare</a></h2>
+                            <p>Donec euurna lobor tis an tes gravi dase iaculis aec enas is euesr suscipitatullamcorper.</p>
+                            <a href="{{ url_for('comp')}}" class="btn-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block mb20 pinside30 outline text-center">
+                        <div class="service-icon mb30"><img src="images/service-icon2.png" class="img-responsive" alt=""></div>
+                        <div class="">
+                            <h2><a href="service-detail.html" class="heading-title">News</a></h2>
+                            <p>Nulla lorem risu elementum spoeircis atincid vestibulum esnean tempor stibullor non pelntesque. </p>
+                            <a href="service-detail.html" class="btn-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block mb20 pinside30 outline text-center">
+                        <div class="service-icon mb30"><img src="images/service-icon3.png" class="img-responsive" alt=""></div>
+                        <div class="">
+                            <h2><a href="#" class="heading-title">Prediction</a></h2>
+                            <p>Posroin in tellusin libero one saculis sihoncus urabitur on ictumie libero elementum leous dapibus tortor.</p>
+                            <a href="service-detail.html" class="btn-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                    <div class="service-block mb20 pinside30 outline text-center">
+                        <!-- service block -->
+                        <div class="service-icon mb30"><img src="images/service-icon4.png" class="img-responsive" alt=""></div>
+                        <div class="">
+                            <h2><a href="service-detail.html" class="heading-title">Top Gainers</a></h2>
+                            <p>Fussce asapien idur loremis svallise dapibuorem ipsum dolorese sitamet ectetur iscing elitra saero.</p>
+                            <a href="service-detail.html" class="btn-link">Read More</a>
+                        </div>
+                    </div>
+                    <!-- /.service block -->
+                </div>
+            </div>
+        </div>
+        <!-- /.section-space80 -->
+    </div>
+    <div class="section-space80 bg-light">
+        <!-- section-space80 -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mb60">
+                    <h1>Who We Are?</h1>
+                    <p>Maecenas semper egestas maximu hasellus utelit loremes mullanec nequeac mione tempus
+                        <br> comodo egetac ummtusell <strong>entesque ulisdiam mcorper tiam blandit</strong> faucibus massaose
+                        <br> tortored euismllam facilisis rutrum pulvinar Integ vulputate leo.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mb40">
+                    <h2>Take on the market with our powerful platforms</h2>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="mb30">
+                        <h3>Multiple Brokage Options</h3>
+                        <p>Scelerisque diam ortis ut phasellus exorci posuere mollis tellus ia lorrem pharetra dolordui.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="mb30">
+                        <h3>Convenience</h3>
+                        <p>Necscelerisque diam ortis ut phasellus exorci one posuere mollis tellus ia lorrem pharetra.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <div class="mb30">
+                        <h3>Expert Research Recommendations</h3>
+                        <p>Elerisque diam ortisut phasellus exorci posuere one mollis tellusia lorrem desones deroits.</p>
+                    </div>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center mt40">
+                    <a href="#" class="btn btn-outline">About us</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.section-space80 -->
+    <div class="section-space60">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-title">
+                        <h1>Customer Reviews</h1>
+                        <p>We welcome feedback from our members as it helps us optimize the site to better service their needs. </p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="outline testimonial-block pinside30 mb30">
+                        <div class="testimonial-header">
+                            <div class="testimonial-icon">
+                                <!-- testimonial icon -->
+                                <i class="fa fa-quote-left"></i>
+                            </div>
+                            <!-- /.testimonial icon -->
+                            <span class="testimonial-title">Good Service</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>“I have only been with the stock pick system and short time and so for have had very good results. 34 trades with only one loss and that amount was only 1.35%”</p>
+                        </div>
+                        <div class="customer-box">
+                            <!-- customer-box -->
+                            <div class="testimonial-img">
+                                <img src="images/testimonial1.jpg" alt=" " class="img-circle">
+                            </div>
+                            <div class="testimonial-info">
+                                <h3 class="customer-name">Jose Chronister</h3>
+                                <h4 class="testimonial-meta">customer</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="outline testimonial-block pinside30 mb30">
+                        <div class="testimonial-header">
+                            <div class="testimonial-icon">
+                                <!-- testimonial icon -->
+                                <i class="fa fa-quote-left"></i>
+                            </div>
+                            <!-- /.testimonial icon -->
+                            <span class="testimonial-title">Great Discovery</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>“What a great discovery. This is what I have been looking for. I don’t want to Daytrade. On the other hand, I do not want to sit on it for a long time before I sell”</p>
+                        </div>
+                        <div class="customer-box">
+                            <!-- customer-box -->
+                            <div class="testimonial-img">
+                                <img src="images/testimonial2.jpg" alt=" " class="img-circle">
+                            </div>
+                            <div class="testimonial-info">
+                                <h3 class="customer-name">Lisa Greene</h3>
+                                <h4 class="testimonial-meta">customer</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="outline testimonial-block pinside30 mb30">
+                        <div class="testimonial-header">
+                            <div class="testimonial-icon">
+                                <!-- testimonial icon -->
+                                <i class="fa fa-quote-left"></i>
+                            </div>
+                            <!-- /.testimonial icon -->
+                            <span class="testimonial-title">Easy to Follow</span>
+                        </div>
+                        <div class="testimonial-content">
+                            <p>“After searching for a site with recommendations that make sense and easy to follow I finally found one. Took about profit first and I’m just getting into the system”</p>
+                        </div>
+                        <div class="customer-box">
+                            <!-- customer-box -->
+                            <div class="testimonial-img">
+                                <img src="images/testimonial3.jpg" alt=" " class="img-circle">
+                            </div>
+                            <div class="testimonial-info">
+                                <h3 class="customer-name">Katheryn Brown</h3>
+                                <h4 class="testimonial-meta">customer</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.section-space80 -->
+    <div class="cta ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-md-7 col-sm-6 col-xs-12">
+                    <h1 class="cta-title">Get in touch <br>
+                 Call, email 24/7 or visit a branch</h1>
+                    <p class="cta-text">Interdum varius quisque mattis elit quam quis posuere odio sagittisvel aliquam a imperdiet ante sed mollis libero maecenas egestaudin morbi arc.</p>
+                    <a href="#" class="btn btn-white mb30">Get Started Now</a>
+                </div>
+                <div class="col-lg-offset-1 col-lg-4 col-md-offset-1 col-md-4 col-sm-6 col-xs-12">
+                    <div class="bg-white pinside30 cta-info">
+                        <div class="cta-call">
+                            <i class="fa fa-phone"></i>
+                            <span>+91 123 456 789</span>
+                        </div>
+                        <div class="cta-mail">
+                            <i class="fa fa-envelope"></i>
+                            <span>Info@Broker.com</span>
+                        </div>
+                        <div class="cta-address">
+                            <i class="fa fa-map-marker"></i>
+                            <span class="address">
+                              4451 Jett Lane Irvine, 
+                              CA 92614
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="section-space80">
+        <!-- section space -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <div class="section-title">
+                        <h1>Brokers Latest News</h1>
+                        <p>Necslerisque diam lobortis ut phasellus exorci posuere mollis tellus idlacinia pharetra dolor.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="post-block pinside40 outline mb30">
+                        <!-- post block -->
+                        <div class="post-meta mb10">
+                            <!-- post meta -->
+                            <span class="meta-admin">By <a href="#" class="meta-link">Admin </a></span>
+                        </div>
+                        <!-- /.post meta -->
+                        <div class="post-header">
+                            <h1 class="post-title mb10"><a href="blog-single.html" class="title">More Than 100 Planners, One Philosophy</a></h1>
+                        </div>
+                        <div class="post-meta mb30">
+                            <!-- post meta -->
+                            <span class="meta-date"><i class="fa fa-calendar"></i> 25 April, 2017 </span>
+                            <span class="meta-comment"><i class="fa fa-comment-o"></i> <a href="#" class="meta-link">(08) </a></span>
+                        </div>
+                        <div class="post-content">
+                            <p>Aliquam sed at sollicitudin tellus aliquam imperdiet is sem rumdui id nisi blandit non lorem tellus aliquam imperdiet is sem rumdui sollicitudin semeque lorem ipsums derons libero nisi vitae elit ullamper mauris vitae dignissim suscipit lorem. </p>
+                            <a href="blog-single.html" class="btn-link">Read More</a> </div>
+                    </div>
+                    <!-- /.post block -->
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="post-block pinside40 outline">
+                        <!-- post block -->
+                        <div class="post-meta mb10">
+                            <!-- post meta -->
+                            <span class="meta-admin">By <a href="#" class="meta-link">Admin </a></span>
+                        </div>
+                        <!-- /.post meta -->
+                        <div class="post-header">
+                            <h1 class="post-title mb10"><a href="blog-single.html" class="title">The Expert Opinion We Recommendation</a></h1>
+                        </div>
+                        <div class="post-meta mb30">
+                            <!-- post meta -->
+                            <span class="meta-date"><i class="fa fa-calendar"></i> 24 April, 2017 </span>
+                            <span class="meta-comment"><i class="fa fa-comment-o"></i> <a href="#" class="meta-link">(08) </a></span>
+                        </div>
+                        <div class="post-content">
+                            <p>Proin inte llus inli bro iacu lis rhon cus.urab itur a dic tum libe roeu emes elem en tum leoiv amus dapi bus torto rsed bibe ndum ull am corp envel its scele risque feli sid pellen tesque era tull pos uere.</p>
+                            <a href="blog-single.html" class="btn-link">Read More</a> </div>
+                    </div>
+                    <!-- /.post block -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer section-space60">
+        <!-- footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                    <div class="footer-widget mb20">
+                        <!-- footer-widget -->
+                        <h3 class="footer-title">Contact Info</h3>
+                        <div class="ft-contact-info">
+                            <!-- ft contact info -->
+                            <div class="ft-icon">
+                                <!-- ft icon -->
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <!-- /.ft icon -->
+                            <div class="ft-content">
+                                <!-- ft content -->
+                                +91 123 456 789
+                            </div>
+                            <!-- /.ft content -->
+                        </div>
+                        <!-- /.ft contact info -->
+                        <div class="ft-contact-info">
+                            <!-- ft contact info -->
+                            <div class="ft-icon">
+                                <!-- ft icon -->
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <!-- /.ft icon -->
+                            <div class="ft-content">
+                                <!-- ft content -->
+                                info@broker.com
+                            </div>
+                            <!-- /.ft content -->
+                        </div>
+                        <!-- /.ft contact info -->
+                        <div class="ft-contact-info">
+                            <!-- ft contact info -->
+                            <div class="ft-icon">
+                                <!-- ft icon -->
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                            <!-- /.ft icon -->
+                            <div class="ft-content">
+                                <!-- ft content -->
+                                4451 Jett Lane Irvine,
+                                <br>CA 92614
+                            </div>
+                            <!-- /.ft content -->
+                        </div>
+                        <!-- /.ft contact info -->
+                    </div>
+                    <!-- /.footer-widget -->
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12">
+                    <div class="footer-widget mb20">
+                        <!-- footer-widget -->
+                        <h3 class="footer-title">Quick Links</h3>
+                        <ul class="bullet listnone no-padding mb0">
+                            <li><i class="fa fa-angle-right"></i> <a href="index.html" class="Home">Home</a></li>
+                            <li><i class="fa fa-angle-right"></i> <a href="service-list.html" title="Services">Services</a></li>
+                            <li><i class="fa fa-angle-right"></i> <a href="blog.html" title="Blog">Blog</a></li>
+                            <li><i class="fa fa-angle-right"></i> <a href="contact-us.html" title="Contact us">Contact us</a></li>
+                        </ul>
+                        <!-- /.footer-widget -->
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                    <div class="footer-widget mb20">
+                        <!-- footer-widget -->
+                        <h3 class="footer-title">Follow Us On</h3>
+                        <ul class="listnone no-padding mb0">
+                            <li class="footer-link"><a href="#"><i class="fa fa-facebook-square "></i> facebook</a></li>
+                            <li class="footer-link"><a href="#"><i class="fa fa-twitter-square "></i> twitter</a></li>
+                            <li class="footer-link"><a href="#"><i class="fa fa-google-plus-square "></i> google-plus</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.footer-widget -->
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                    <div class="footer-widget">
+                        <!-- footer-widget -->
+                        <h3 class="footer-title">Newsletter</h3>
+                        <p>Subscribe our email newsletter today to receive updates.</p>
+                        <form>
+                            <div class="form-group">
+                                <label for="inputEmail3" class="sr-only control-label">Email</label>
+                                <input type="email" class="form-control" id="inputEmail3" placeholder="Enter Email Address">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-outline">Subscribe</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.footer-widget -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.footer -->
+    <div class="tiny-footer">
+        <!-- tiny-footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <p>Copyrights © 2017. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.tiny-footer -->
+    <!-- back to top icon -->
+    <a href=" #0 " class="cd-top" title="Go to top">Top</a>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content ">
+                <div class="modal-body">
+                    <iframe width="100%" height="600" src="https://www.youtube.com/embed/CoirzH4fByQ" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/menumaker.js"></script>
+    <script type="text/javascript">
+    $("#navigation").menumaker({
+        title: "Menu",
+        format: "multitoggle"
+    });
+    </script>
+    <!-- animsition -->
+    <script type="text/javascript" src="js/animsition.js"></script>
+    <script type="text/javascript" src="js/animsition-script.js"></script>
+    <!-- sticky header -->
+    <script type="text/javascript" src="js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="js/sticky-header.js"></script>
+    <!-- owl carsoul -->
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/testimonial.js"></script>
+    <!-- Back to top script -->
+    <script src="js/back-to-top.js" type="text/javascript"></script>
+</body>
+
+</html>
